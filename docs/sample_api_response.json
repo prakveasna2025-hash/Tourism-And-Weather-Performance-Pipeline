@@ -1,0 +1,42 @@
+﻿{
+    "dataset_name":  "International Tourist Arrivals to Cambodia 2018 - 2025",
+    "organization":  "Ministry of Tourism (MOT)",
+    "frequency":  "monthly",
+    "coverage":  "2018-01-01 to 2025-12-31",
+    "unit":  "persons",
+    "source_url":  "https://data.mef.gov.kh/api/v1/public-datasets/pd_6715e15d40cc5500017936e5/json",
+    "schema":  [
+                   {
+                       "example":  2018,
+                       "name":  "year",
+                       "type":  "number (int after cast)"
+                   },
+                   {
+                       "example":  "Jan",
+                       "name":  "months",
+                       "type":  "string (Jan..Dec)"
+                   },
+                   {
+                       "example":  596241,
+                       "name":  "number_of_tourists",
+                       "type":  "number (int after cast)"
+                   }
+               ],
+    "sample_rows":  [
+                        {
+                            "year":  2018.0,
+                            "months":  "Jan",
+                            "number_of_tourists":  596241.0
+                        },
+                        {
+                            "year":  2018.0,
+                            "months":  "Feb",
+                            "number_of_tourists":  542937.0
+                        },
+                        {
+                            "year":  2018.0,
+                            "months":  "Mar",
+                            "number_of_tourists":  572075.0
+                        }
+                    ]
+}
