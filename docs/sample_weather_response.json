@@ -1,0 +1,57 @@
+﻿{
+    "source_name":  "Open-Meteo Historical Weather API (ERA5)",
+    "source_url":  "https://archive-api.open-meteo.com/v1/archive?latitude=11.5564\u0026longitude=104.9282\u0026start_date=2019-01-01\u0026end_date=2023-12-31\u0026daily=temperature_2m_mean,precipitation_sum,relative_humidity_2m_mean,wind_speed_10m_max\u0026timezone=Asia%2FPhnom_Penh",
+    "city":  "phnom_penh",
+    "latitude_requested":  11.5564,
+    "longitude_requested":  104.9282,
+    "latitude_returned":  11.564148,
+    "longitude_returned":  104.94643,
+    "elevation_m":  14.0,
+    "timezone":  "Asia/Phnom_Penh",
+    "coverage":  "2019-01-01 to 2023-12-31",
+    "schema":  [
+                   {
+                       "unit":  "iso8601",
+                       "field":  "time"
+                   },
+                   {
+                       "unit":  "°C",
+                       "field":  "temperature_2m_mean"
+                   },
+                   {
+                       "unit":  "mm",
+                       "field":  "precipitation_sum"
+                   },
+                   {
+                       "unit":  "%",
+                       "field":  "relative_humidity_2m_mean"
+                   },
+                   {
+                       "unit":  "km/h",
+                       "field":  "wind_speed_10m_max"
+                   }
+               ],
+    "sample_rows":  [
+                        {
+                            "time":  "2019-01-01",
+                            "temperature_2m_mean":  25.7,
+                            "precipitation_sum":  0.00,
+                            "relative_humidity_2m_mean":  60,
+                            "wind_speed_10m_max":  21.6
+                        },
+                        {
+                            "time":  "2019-01-02",
+                            "temperature_2m_mean":  24.6,
+                            "precipitation_sum":  0.70,
+                            "relative_humidity_2m_mean":  69,
+                            "wind_speed_10m_max":  22.5
+                        },
+                        {
+                            "time":  "2019-01-03",
+                            "temperature_2m_mean":  25.7,
+                            "precipitation_sum":  0.90,
+                            "relative_humidity_2m_mean":  68,
+                            "wind_speed_10m_max":  23.3
+                        }
+                    ]
+}
