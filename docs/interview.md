@@ -1,0 +1,2 @@
+# connection database by using Airflow's PostgresHook:
+"I tested the database connectivity by using Airflow's PostgresHook inside the container. This bypasses local browser restrictions and proves that the Airflow executor can successfully authenticate and run SQL against the warehouse."
