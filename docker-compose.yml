@@ -4,12 +4,14 @@ x-airflow-common: &airflow-common
   image: apache/airflow:2.9.0
   environment: &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres-metadata:5432/airflow
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__WEBSERVER__SECRET_KEY: 'my-super-secret-key'
   volumes:
     - ./dags:/opt/airflow/dags
+    - ./include:/opt/airflow/include # <--- ADD THIS LINE
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
   user: "${AIRFLOW_UID:-50000}:0"
