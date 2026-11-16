@@ -313,3 +313,25 @@ deferred to the transform stage. Raw data is immutable (see D-003).
 - Ingestion code must not "fix" the CSV — it saves bytes.
 - Transform must explicitly handle each issue above.
 - Any analysis on pre-2019 data must also apply these rules.
+
+
+
+---
+
+## D-009 — Keep the `staging` schema for intermediate transformations
+
+**Date:** 2026-11-16
+**Status:** Decided
+
+### Decision
+We will retain the `staging` schema (created in `01_create_schemas.sql`) even though the original reference PDF did not define specific staging tables. 
+
+### Rationale
+- **Separation of concerns:** `raw` holds immutable string/JSON data. `staging` holds typed, cleaned, deduplicated data. `analytics` holds joined business logic.
+- **Debuggability:** If an `analytics` table looks wrong, we can inspect the `staging` table to see if the issue was a bad type cast or a bad join.
+- **Performance:** Casting text to dates and integers is computationally expensive. Doing it once in `staging` speeds up the final `analytics` joins.
+
+### What will staging hold?
+- `staging.stg_tourism_monthly` (cleaned tourism data)
+- `staging.stg_weather_daily` (cleaned weather data)
+- `staging.stg_exchange_rate_daily` (cleaned exchange rate data)

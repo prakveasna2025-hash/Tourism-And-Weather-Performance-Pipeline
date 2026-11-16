@@ -14,4 +14,34 @@ Why It Matters for Airflow (Day 5)
 In your project roadmap, mounting the dags/ folder means Airflow can automatically read and execute the Python DAG files you write in your local code editor (like Visual Studio Code) without you having to manually copy-paste them into the container every time.
 
 
+# "How do you manage database credentials in your DAGs?"
+"I never hardcode them. I store the host, port, and password in an Airflow Connection. In the code, I just pass the conn_id to a PostgresHook, and Airflow handles the authentication securely."
 
+# "How does Airflow talk to your database?"
+"Via Provider Packages. I use apache-airflow-providers-postgres which gives me the PostgresHook and PostgresOperator."
+
+# "What is the difference between the Airflow metadata DB and the warehouse DB?"
+
+"Metadata DB stores DAG run history and connections (e.g., postgres-metadata). The Warehouse DB stores the actual analytical data (e.g., postgres-warehouse)."
+
+# "Why did you mount an include/ folder?"
+
+"To keep the dags/ folder clean. dags/ should only contain DAG files. Complex SQL queries, CSV lookup tables, or Python helper scripts go in include/ so Airflow doesn't waste time parsing them as DAGs."
+
+
+# Why do we use schemas?
+In PostgreSQL, a "schema" is like a folder inside your database. Instead of throwing all tables into the default public schema, we organize them by their data maturity:
+
+raw: Exact copies of the source data (API responses, CSVs). No transformations.
+
+staging: Intermediate tables where we clean, cast types, and handle nulls.
+
+analytics: Final, business-ready tables (facts and dimensions) that Power BI or data scientists will query.
+
+# what ingestion refering:
+In data engineering, ingestion is the process of pulling raw data from external sources (like APIs, CSV files, or external databases) and loading it into your own storage system or data warehouse (like your PostgreSQL database) so your pipeline can work with it.
+
+# what data warehouse refer to:
+A data warehouse is a central database designed specifically for storing, organizing, and analyzing historical data collected from multiple different sources (like APIs, CSV files, and business apps).
+
+While regular application databases are built to handle fast, everyday transactions (like processing an order or saving a user login), a data warehouse is built for reporting, analytics, and business intelligence.
