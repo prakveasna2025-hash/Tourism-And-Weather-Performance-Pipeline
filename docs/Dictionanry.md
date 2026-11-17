@@ -43,5 +43,3 @@ In data engineering, ingestion is the process of pulling raw data from external 
 
 # what data warehouse refer to:
 A data warehouse is a central database designed specifically for storing, organizing, and analyzing historical data collected from multiple different sources (like APIs, CSV files, and business apps).
-
-While regular application databases are built to handle fast, everyday transactions (like processing an order or saving a user login), a data warehouse is built for reporting, analytics, and business intelligence.
