@@ -1,4 +1,4 @@
-# connection database by using Airflow's PostgresHook:
+ # connection database by using Airflow's PostgresHook:
 "I tested the database connectivity by using Airflow's PostgresHook inside the container. This bypasses local browser restrictions and proves that the Airflow executor can successfully authenticate and run SQL against the warehouse."
 
 
@@ -40,3 +40,15 @@ In a real data pipeline, you never assume the database state. A previous script 
 
 "It makes the SQL script idempotent. If the pipeline runs twice, it won't fail trying to insert duplicate cities or dates. It just skips them."
 
+
+# How do you handle a dirty CSV with encoding issues?"
+
+"If a file has a UTF-8 BOM (Byte Order Mark), it adds an invisible character to the first column name. I always read CSVs with encoding='utf-8-sig' in pandas to strip it out automatically."
+
+# Explain how your HTTP client handles API failures."
+
+"I use urllib3.Retry mounted to a requests.Session. It automatically retries on 429 and 5xx errors with exponential backoff (1s, 2s, 4s) to handle temporary network blips and rate limits. I also enforce a 10-second timeout to prevent hanging."
+
+# How do you handle file paths in Python?"
+
+"I never hardcode absolute paths. I use pathlib.Path(__file__).resolve().parent to dynamically resolve the project root, making the code portable across any environment."

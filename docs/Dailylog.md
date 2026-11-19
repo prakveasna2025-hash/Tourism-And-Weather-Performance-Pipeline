@@ -26,3 +26,13 @@ except Exception as e:
     print(f'❌ CONNECTION FAILED: {e}')
 "
 
+# Log by regular terminal:
+
+wsl -d Ubuntu
+cd ~/projects/Tourism-And-Weather-Performance-Pipeline
+source .venv/bin/activate
+
+# How to run the scipts:
+
+uv run python -m src.load.load_exchange_rate
+
