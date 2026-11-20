@@ -52,3 +52,17 @@ In a real data pipeline, you never assume the database state. A previous script 
 # How do you handle file paths in Python?"
 
 "I never hardcode absolute paths. I use pathlib.Path(__file__).resolve().parent to dynamically resolve the project root, making the code portable across any environment."
+
+# "What is an Upsert and why use it?"
+
+"Upsert means Update or Insert. It's used to make a pipeline idempotent. Instead of risking duplicate rows when a pipeline reruns, the ON CONFLICT DO UPDATE clause checks if the row exists and updates it, or inserts it if it's new."
+
+# How do you load 100,000 rows into PostgreSQL efficiently in Python?"
+
+I would not use a for loop with individual INSERT statements, as that causes massive network overhead. I use psycopg2.extras.execute_values to batch the rows into a single bulk insert command."
+
+# How do you handle database secrets in your code?"
+
+"I use python-dotenv. Credentials are stored in a local .env file which is included in .gitignore, so they are never pushed to version control."
+
+
