@@ -65,4 +65,30 @@ I would not use a for loop with individual INSERT statements, as that causes mas
 
 "I use python-dotenv. Credentials are stored in a local .env file which is included in .gitignore, so they are never pushed to version control."
 
+# How do you handle API pagination in Python?"
+
+"I use a while loop that checks the total_pages metadata returned in the API response. I append the data from each page into a list and increment the page counter until I've reached the last page."
+
+# Why did you cast the API floats to strings before loading?"
+
+"The JSON API returned years as 2018.0 (floats). Since my raw database column is TEXT, loading floats directly introduces a decimal point that will break future joins. Casting to int then str cleans the data before insertion."
+
+# What the different between API and CSV?
+
+When you use a CSV: Best for historical backfills, one-time bulk exports, or data shared by teams that work in spreadsheets. Because it's a single file, you get all rows at once, though you have to manually replace the file when new data arrives.
+
+When you use an API: Best for recurring, automated pipelines (like daily weather or monthly tourism stats). Instead of downloading a new file every month, your script asks the server for updates—though you have to write extra logic (like pagination loops and retry handlers) to fetch the data reliably.
+
+
+# "How do you handle outliers in your data pipelines?"
+
+"I first ask if the outlier is a data error or a real-world event. For example, in tourism data, the COVID-19 drop in 2020 is a real structural break, not an error. I avoid automated statistical rejection and instead rely on business rules for validation."
+
+# What happens if your pipeline runs before the end of the month?"
+
+"I first ask if the outlier is a data error or a real-world event. For example, in tourism data, the COVID-19 drop in 2020 is a real structural break, not an error. I avoid automated statistical rejection and instead rely on business rules for validation."
+
+# Where do you put validation logic in your repo?"
+
+"In the src/transform/ folder. Validation is the first step of the 'T' in ELT. Extractors should just grab data; transforms should validate and clean it."
 
