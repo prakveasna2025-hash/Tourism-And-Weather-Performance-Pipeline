@@ -43,3 +43,13 @@ In data engineering, ingestion is the process of pulling raw data from external 
 
 # what data warehouse refer to:
 A data warehouse is a central database designed specifically for storing, organizing, and analyzing historical data collected from multiple different sources (like APIs, CSV files, and business apps).
+
+# How do you test your data pipelines?"
+
+I write unit tests for isolated transformation logic using pytest, such as date-parsing utilities. For integration tests, I verify idempotency by running the loader twice against a local database to ensure row counts remain identical."
+
+# Why use --dev when installing pytest?"
+
+To separate development dependencies from production dependencies. When deploying to a server, you only want to install what's needed to run the pipeline, not the testing frameworks."
+
+
