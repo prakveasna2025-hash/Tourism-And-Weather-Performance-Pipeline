@@ -53,3 +53,6 @@ I write unit tests for isolated transformation logic using pytest, such as date-
 To separate development dependencies from production dependencies. When deploying to a server, you only want to install what's needed to run the pipeline, not the testing frameworks."
 
 
+# What is validation mean?
+
+Data validation is the process of checking that data is accurate, complete, and meets defined rules before it is stored, processed, or used for analysis. Think of it as a quality-control gatekeeper that catches bad data at the door before it corrupts downstream tables, dashboards, or models.
