@@ -86,9 +86,17 @@ When you use an API: Best for recurring, automated pipelines (like daily weather
 
 # What happens if your pipeline runs before the end of the month?"
 
-"I first ask if the outlier is a data error or a real-world event. For example, in tourism data, the COVID-19 drop in 2020 is a real structural break, not an error. I avoid automated statistical rejection and instead rely on business rules for validation."
+"My validation script checks for missing months and logs a warning. It doesn't crash the pipeline; it simply processes the data available up to that day."
 
 # Where do you put validation logic in your repo?"
 
 "In the src/transform/ folder. Validation is the first step of the 'T' in ELT. Extractors should just grab data; transforms should validate and clean it."
 
+🎯 Interview Takeaway
+If an interviewer asks: "Do you validate all your data sources the same way?"
+
+Say this:
+"No. I tailor validation to the risk profile of the source. For a static historical CSV, I focus on structural integrity—checking that the file format, encoding, and date parsing are correct. For a live API, I focus on pagination completeness, schema drift, and logical constraints like ensuring we don't have negative numbers or missing periods. In both cases, I use domain knowledge to avoid dropping real-world anomalies like the COVID-19 pandemic."
+
+
+# 
