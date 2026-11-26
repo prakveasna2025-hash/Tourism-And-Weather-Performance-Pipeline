@@ -102,3 +102,16 @@ Say this:
 # How do you handle type casting from an API to a database?"
 
 "Weather APIs often re-run their global models (like ERA5) to improve historical accuracy. An Upsert allows the pipeline to overwrite the old data with the newly calibrated data automatically."
+
+
+# "How do you scale a data pipeline to handle multiple sources or locations?"
+
+"I use config-driven development. Instead of writing a new script for every city, I define the cities and their parameters in a centralized dictionary or YAML file, and my extractor loops through them."
+
+# "What happens if the business asks you to add a new city tomorrow?"
+
+"Because of the refactored config-driven architecture, adding a new city takes exactly one line of code (adding the city name and coordinates to the dictionary). The extraction, validation, and loading logic remain untouched."
+
+# "Why is hardcoding parameters considered an anti-pattern?"
+
+"Hardcoding means you have to modify and redeploy the core logic every time a business requirement changes. It increases the risk of introducing bugs. Externalizing config separates the 'what' from the 'how'."
