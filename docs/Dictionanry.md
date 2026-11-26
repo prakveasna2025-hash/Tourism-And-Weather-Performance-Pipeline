@@ -56,3 +56,10 @@ To separate development dependencies from production dependencies. When deployin
 # What is validation mean?
 
 Data validation is the process of checking that data is accurate, complete, and meets defined rules before it is stored, processed, or used for analysis. Think of it as a quality-control gatekeeper that catches bad data at the door before it corrupts downstream tables, dashboards, or models.
+
+
+# Latgitude and Longitude
+
+Latitude (lat): Measures how far north or south a point is from the Equator (0°), ranging from 90°S (-90) at the South Pole to 90°N (+90) at the North Pole. Lines of latitude run east-west parallel to the Equator.
+
+Longitude (lon): Measures how far east or west a point is from the Prime Meridian (0°, passing through Greenwich, London), ranging from 180°W (-180) to 180°E (+180). Lines of longitude run north-south from pole to pole.

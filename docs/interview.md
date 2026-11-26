@@ -99,4 +99,6 @@ Say this:
 "No. I tailor validation to the risk profile of the source. For a static historical CSV, I focus on structural integrity—checking that the file format, encoding, and date parsing are correct. For a live API, I focus on pagination completeness, schema drift, and logical constraints like ensuring we don't have negative numbers or missing periods. In both cases, I use domain knowledge to avoid dropping real-world anomalies like the COVID-19 pandemic."
 
 
-# 
+# How do you handle type casting from an API to a database?"
+
+"Weather APIs often re-run their global models (like ERA5) to improve historical accuracy. An Upsert allows the pipeline to overwrite the old data with the newly calibrated data automatically."
