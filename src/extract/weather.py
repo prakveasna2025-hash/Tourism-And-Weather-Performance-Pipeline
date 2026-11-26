@@ -3,6 +3,14 @@ from src.utils.http_client import fetch_json
 
 logger = logging.getLogger(__name__)
 
+# 🌟 TASK 2: The City Config
+# This dictionary centralizes our cities. To add a new one, just add a line here.
+CITIES = {
+    "Phnom Penh": {"lat": 11.5564, "lon": 104.9282},
+    "Siem Reap": {"lat": 13.3671, "lon": 103.8448},
+    "Sihanoukville": {"lat": 10.6253, "lon": 103.5234}
+}
+
 
 def extract_weather_city(city_name: str, lat: float, lon: float) -> list[dict]:
     """
@@ -10,7 +18,6 @@ def extract_weather_city(city_name: str, lat: float, lon: float) -> list[dict]:
     """
     base_url = "https://archive-api.open-meteo.com/v1/archive"
 
-    # 1. Define the API parameters
     params = {
         "latitude": lat,
         "longitude": lon,
@@ -21,15 +28,11 @@ def extract_weather_city(city_name: str, lat: float, lon: float) -> list[dict]:
     }
 
     logger.info(f"Fetching weather data for {city_name}...")
-
-    # 2. Call the API using our custom HTTP Client
     response = fetch_json(base_url, params=params)
 
-    # 3. Extract the daily columnar data
     daily_data = response.get("daily", {})
     dates = daily_data.get("time", [])
 
-    # 4. Transpose the arrays into a list of row dictionaries
     rows = []
     for i in range(len(dates)):
         row = {
@@ -45,7 +48,18 @@ def extract_weather_city(city_name: str, lat: float, lon: float) -> list[dict]:
     logger.info(f"Successfully parsed {len(rows)} days for {city_name}.")
     return rows
 
+# 🌟 TASK 1: The Refactored Extractor
 
-def extract_phnom_penh() -> list[dict]:
-    """Wrapper to extract just Phnom Penh."""
-    return extract_weather_city("Phnom Penh", 11.5564, 104.9282)
+
+def extract_all_weather() -> list[dict]:
+    """
+    Loops through the CITIES config and extracts weather data for all of them.
+    """
+    all_weather_data = []
+
+    for city_name, coords in CITIES.items():
+        city_data = extract_weather_city(
+            city_name, coords["lat"], coords["lon"])
+        all_weather_data.extend(city_data)
+
+    return all_weather_data

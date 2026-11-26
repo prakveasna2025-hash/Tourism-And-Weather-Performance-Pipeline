@@ -3,7 +3,7 @@ import logging
 import psycopg2
 from psycopg2.extras import execute_values
 from dotenv import load_dotenv
-from src.extract.weather import extract_phnom_penh
+from src.extract.weather import extract_all_weather
 from src.transform.validate_weather import validate_weather_data
 
 load_dotenv()
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 def load_weather_data():
     # 1. Extract & Validate
-    raw_data = extract_phnom_penh()
+    raw_data = extract_all_weather()
     validated_data = validate_weather_data(raw_data)
 
     # 2. Connect to Database
