@@ -3,6 +3,7 @@ version: '3.8'
 x-airflow-common: &airflow-common
   image: apache/airflow:2.9.0
   environment: &airflow-common-env
+    PYTHONPATH: /opt/airflow:/opt/airflow/src # PYTHONPATH variable so Airflow knows where to look for imports
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres-metadata:5432/airflow
@@ -11,6 +12,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__WEBSERVER__SECRET_KEY: 'my-super-secret-key'
   volumes:
     - ./dags:/opt/airflow/dags
+    - ./src:/opt/airflow/src # Airflow can actually see our src/ code.
     - ./include:/opt/airflow/include # <--- ADD THIS LINE
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
@@ -45,7 +47,7 @@ services:
     volumes:
       - postgres_warehouse_data:/var/lib/postgresql/data
     ports:
-      - "5435:5432" # Exposed on 5433 so it doesn't clash with metadata DB
+      - "5435:5432" # Exposed on 5435 so it doesn't clash with metadata DB
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "warehouse" ]
       interval: 5s
