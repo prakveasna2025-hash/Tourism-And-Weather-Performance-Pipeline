@@ -10,14 +10,15 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 
-def load_weather_data():
+def load_weather_data(validated_data: list[dict]):
     # 1. Extract & Validate
     raw_data = extract_all_weather()
     validated_data = validate_weather_data(raw_data)
 
     # 2. Connect to Database
     conn = psycopg2.connect(
-        host="localhost", port=5435,
+        host=os.getenv("WAREHOUSE_HOST", "postgres-warehouse"),
+        port=os.getenv("WAREHOUSE_PORT", "5432"),
         dbname=os.getenv("WAREHOUSE_DB", "tourism_weather_dw"),
         user=os.getenv("WAREHOUSE_USER", "warehouse"),
         password=os.getenv("WAREHOUSE_PASS", "warehouse")
@@ -59,4 +60,8 @@ def load_weather_data():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    load_weather_data()
+    from src.extract.weather import extract_all_weather
+    from src.transform.validate_weather import validate_weather_data
+    raw_data = extract_all_weather()
+    valid_data = validate_weather_data(raw_data)
+    load_weather_data(valid_data)
