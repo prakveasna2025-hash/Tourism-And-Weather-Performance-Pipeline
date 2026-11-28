@@ -63,3 +63,22 @@ Data validation is the process of checking that data is accurate, complete, and 
 Latitude (lat): Measures how far north or south a point is from the Equator (0°), ranging from 90°S (-90) at the South Pole to 90°N (+90) at the North Pole. Lines of latitude run east-west parallel to the Equator.
 
 Longitude (lon): Measures how far east or west a point is from the Prime Meridian (0°, passing through Greenwich, London), ranging from 180°W (-180) to 180°E (+180). Lines of longitude run north-south from pole to pole.
+
+# Interation Mean:
+
+In a data pipeline, an iteration is a single pass or cycle through a repeating process—such as processing one item in a list, running one batch of records, or executing one scheduled run of a pipeline.
+
+# What is Dynamic Task Mapping in Airflow?"
+
+It allows a single task definition to be expanded into multiple parallel task instances at runtime based on a list of inputs. I used it to fetch weather data for multiple cities simultaneously using .expand()."
+
+# Why use .expand() instead of a Python for loop inside a task?"
+
+If a loop runs inside a single task, a failure in one iteration fails the whole task. With .expand(), each iteration gets its own isolated task. If one city fails, the others can still succeed, and I can retry just the failed task."
+
+
+# Why did your local script work, but the Airflow Docker task failed to connect to the DB?"
+
+Inside a Docker container, localhost refers to the container itself, not the host machine. To reach another container, you must use the Docker Compose service name (e.g., postgres-warehouse) and the internal container port (e.g., 5432)."
+
+

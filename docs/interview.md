@@ -115,3 +115,10 @@ Say this:
 # "Why is hardcoding parameters considered an anti-pattern?"
 
 "Hardcoding means you have to modify and redeploy the core logic every time a business requirement changes. It increases the risk of introducing bugs. Externalizing config separates the 'what' from the 'how'."
+
+
+#  Interview Takeaway
+If an interviewer asks: "Why does your pipeline work locally but fail when deployed to Docker/Airflow?"
+
+Say this:
+"It's almost always a networking issue with localhost. When running locally, localhost points to the host machine where the database is exposed on a mapped port. But inside a Docker container, localhost points to the container itself. To fix it, I use the Docker Compose service name (like postgres-warehouse) as the hostname and the internal container port (5432) instead of the externally mapped port (5435)."

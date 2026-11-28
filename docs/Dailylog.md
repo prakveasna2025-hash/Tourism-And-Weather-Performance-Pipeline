@@ -39,3 +39,4 @@ uv run python -m src.load.load_exchange_rate
 # Airflow rejects visits:
 docker compose ps
 sudo chown -R 50000:0 logs/
+refresh docker.....
