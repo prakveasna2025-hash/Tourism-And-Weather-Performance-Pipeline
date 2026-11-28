@@ -122,3 +122,19 @@ If an interviewer asks: "Why does your pipeline work locally but fail when deplo
 
 Say this:
 "It's almost always a networking issue with localhost. When running locally, localhost points to the host machine where the database is exposed on a mapped port. But inside a Docker container, localhost points to the container itself. To fix it, I use the Docker Compose service name (like postgres-warehouse) as the hostname and the internal container port (5432) instead of the externally mapped port (5435)."
+
+
+
+# What are the first things you check when validating a new dataset?"
+
+I perform structural validation first. I check for schema conformance (are all expected columns present?), row count (is the data volume reasonable?), nulls in critical columns, and duplicates based on the primary/unique keys."
+
+
+# How do you test your validation logic?"
+
+I use pytest and pytest.fixture to create dummy Pandas DataFrames. I write happy-path tests to ensure valid data passes, and I use pytest.raises() to intentionally inject bad data (like nulls or duplicates) to prove the validation functions actually catch them."
+
+# Why is failing fast important in a pipeline?"
+
+If bad structural data gets past the validation layer, it can corrupt the staging tables or cause the analytical layer to crash. Failing fast at the structural layer prevents bad data from propagating downstream."
+
